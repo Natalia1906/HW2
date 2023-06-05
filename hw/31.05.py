@@ -3,12 +3,24 @@
 import requests
 import json
 
-number = input("Введите число: ")
-url = "https://jsonplaceholder.typicode.com/todos/№"
-_id = requests.get(url)
+number = int(input("Введите число: "))
 
-with open("_id.json()", mode = "w", encoding = "utf-8") as file:
-    _id.json = json.dump(file)
+url = f"https://jsonplaceholder.typicode.com/todos/{number}"
+
+try:
+    response = requests.get(url)
+    response.raise_for_status()
+
+    todo = response.json()
+
+    filename = f"{todo['id']}.json"
+    with open(filename,mode = "w", encoding = "utf-8") as file:
+        json.dump(todo, file)
+    print(f"Данные сохранены в файл: {filename}")
+except Exception as error:
+    print(error)
+    print("Ошибка")
+
 
 
 
