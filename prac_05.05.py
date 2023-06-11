@@ -34,3 +34,7 @@ if __name__ =="__main__":
             print(data_raw.status_code)
     except Exception as error:
         print(error)
+
+
+
+    
