@@ -124,13 +124,17 @@ res5 = set_gen(numbers)
 from datetime import datetime
 import json
 
-day1 = input("Введите первый день недели:")
-day2 = input("Введите второй день недели:")
+day1 = 'Monday'
+day2 = 'Wednesday'
 
-date1 = day1.strftime("%A")
-date2 = day2.strftime("%A")
+date1 = datetime.strptime(day1, "%A")
+date2 = datetime.strptime(day2, "%A")
 
-difference = date2 - date1
+print(date1)
+
+difference = abs(date2 - date1)
+print(difference)
+
 hours_left = difference.total_seconds() / 3600
 print("Осталось", hours_left)
 
