@@ -124,15 +124,15 @@ res5 = set_gen(numbers)
 from datetime import datetime
 import json
 
-day1 = 'Monday'
-day2 = 'Wednesday'
+day1 = "Monday 2023-01-01"
+day2 = "Wednesday 2023-01-03"
 
-date1 = datetime.strptime(day1, "%A")
-date2 = datetime.strptime(day2, "%A")
+date1 = datetime.strptime(day1.split(" ")[1], "%Y-%m-%d")
+date2 = datetime.strptime(day2.split(" ")[1], "%Y-%m-%d")
 
 print(date1)
 
-difference = abs(date2 - date1)
+difference = date2 - date1
 print(difference)
 
 hours_left = difference.total_seconds() / 3600
