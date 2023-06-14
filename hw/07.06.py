@@ -15,7 +15,7 @@ def register(email, password):
     print("Пользователь зарегистрирован")
 #register(email, password)
 
-#todo 2 задание ????
+#todo 2 задание
 
 import requests
 
