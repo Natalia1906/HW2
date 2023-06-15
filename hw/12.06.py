@@ -1,3 +1,17 @@
+#TODO задание 2
+from openpyxl import Workbook, load_workbook
+combined_file = Workbook()
+combined_sheet = combined_file.active
+
+files = ['Лист1.xlsx', 'Лист2.xlsx', 'Лист3.xlsx']
+
+for file in files:
+    workbook = load_workbook(file)
+    sheet = workbook.active
+    for row in sheet.iter_rows(values_only=True):
+        combined_sheet.append(row)
+combined_file.save('combined_file.xlsx')
+
 #TODO Домашнее задание №26. Регулярные выражения
 #1
 import re
@@ -30,8 +44,19 @@ print(string("apple;banana,cherry,orange"))
 
 #TODO Домашнее задание №27. Модули и пакеты
 
+candidates = ["Аскаров", "Бекмуханов", "Ернур", "Пешая", "Карим", "Шаримазданов"]
 
+def search_winner(candidates, votes):
+    vote_counts = {candidate: votes.count(candidate) for candidate in candidates}
+    max_votes = max(vote_counts.values())
+    winners = [candidate for candidate, count in vote_counts.items() if count == max_votes]
+    winner = min(winners,key = len)
+    return winner, max_votes
 
-
-
-
+votes = []
+while True:
+    vote = input("Вы отдаете голос за(Enter для завершения голосования): ")
+    if vote == "":
+        break
+    votes.append(vote)
+print(search_winner(candidates, votes))
