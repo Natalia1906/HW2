@@ -1,20 +1,40 @@
 #TODO задание 2
 from openpyxl import Workbook, load_workbook
-combined_file = Workbook()
-combined_sheet = combined_file.active
-
-files = ['Лист1.xlsx', 'Лист2.xlsx', 'Лист3.xlsx']
-
-for file in files:
-    workbook = load_workbook(file)
+import re
+def extra():
+    col1 = []
+    workbook = load_workbook('Лист1.xlsx')
     sheet = workbook.active
-    for row in sheet.iter_rows(values_only=True):
-        combined_sheet.append(row)
-combined_file.save('combined_file.xlsx')
+    for i in range(1, sheet.max_row + 1):
+        col1.append(sheet.cell(row=i, column=1).value)
+
+    col2 = []
+    workbook = load_workbook('Лист2.xlsx')
+    sheet = workbook.active
+    for i in range(1, sheet.max_row + 1):
+        col2.append(sheet.cell(row=i, column=2).value)
+
+    col3 = []
+    workbook = load_workbook('Лист3.xlsx')
+    sheet = workbook.active
+    for i in range(1, sheet.max_row + 1):
+        col3.append(sheet.cell(row=i, column=3).value)
+
+    matrix = [col1, col2, col3]
+
+    combined_file = Workbook()
+    combined_sheet = combined_file.active
+    row_i = 0
+    for i in matrix:
+        row_i += 1
+        col_i = 0
+        for j in i:
+            col_i += 1
+            combined_sheet.cell(row=row_i, column=col_i, value=j)
+    combined_file.save('combined_file.xlsx')
 
 #TODO Домашнее задание №26. Регулярные выражения
 #1
-import re
 emails_list = ["admin@gmail.com", "user@email.com", "admin123@gmail.com", "user34@email.com"]
 def extract_domains(emails):
     domains = []
@@ -26,21 +46,18 @@ def extract_domains(emails):
             domain = match.group()
             domains.append(domain)
     return domains
-print(extract_domains(emails_list))
 
 #2
 def words(text):
     pattern1 = r'\b\w*[aeiouAEIOU]\w*\b'
     need_word = re.findall(pattern1, text)
     return need_word
-print(words("Apple is a fruit"))
 
 #3
 def string(text2):
     pattern2 = r'[,;\s]'
     splitted = re.split(pattern2, text2)
     return splitted
-print(string("apple;banana,cherry,orange"))
 
 #TODO Домашнее задание №27. Модули и пакеты
 
@@ -59,4 +76,10 @@ while True:
     if vote == "":
         break
     votes.append(vote)
-print(search_winner(candidates, votes))
+
+if __name__ == "__main__":
+    extra()
+    print(extract_domains(emails_list))
+    print(words("Apple is a fruit"))
+    print(string("apple;banana,cherry,orange"))
+    print(search_winner(candidates, votes))
