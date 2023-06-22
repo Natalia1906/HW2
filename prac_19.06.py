@@ -34,7 +34,7 @@ def save_10_todo_multiprocessing():
         process_list.append(multiprocessing.Process(target=save_1_todo, args=(i,),kwargs={}))
     for process in process_list:
         process.start()
-    for process in process_list():
+    for process in process_list:
         process.join()
 
 
