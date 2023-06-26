@@ -79,7 +79,7 @@ def window_for_multiprocess():
 #############################################
 
 async def async_download_one_image():
-    url = "https://picsum.photos/320/240/"
+    url = "https://picsum.photos/320/240"
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             data = await response.read()
@@ -106,9 +106,9 @@ if __name__ == '__main__':
     #download_image_sync()
     #window_for_sync()
     #download_image_thread()
-    #window_for_thread()
+    window_for_thread()
     #download_image_multiprocess()
     #window_for_multiprocess()
-
-    async_download_one_image()
+    #window_for_async()
+    #async_download_one_image()
     #async_task()
